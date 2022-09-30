@@ -68,7 +68,28 @@ class Customer(Person):
         else:
             print("the customer is out of range")
             return false
+    def _have_enough_money(self, vendor, number_of_icecreams):
+        self.vendor = vendor
+        self.number_of_icecreams = number_of_icecreams
+        if self.wallet.money >= (vendor.price * number_of_icecreams):
+            print("you have enough money")
+            return True 
+        else:
+            print("you dont have enough money")
+            return False 
     
+    def request_icecream(self, vendor, number_of_icecreams):
+        self.vendor = vendor
+        self.number_of_icecreams = number_of_icecreams
+        if self._is_in_range and self._have_enough_money:
+            print("request has been made")
+            vendor.sellTo(customer,number_of_icecreams)
+        
+    def __str__(self):
+        return f"you are the customer{super().__str__()}"
+        
+
     
-vendor = Vendor("Anfal", 3, 6 , 5 ,6)
+vendor = Vendor("Anfal", 3, 6 )
 customer = Customer("Ali", 20, 6 )
+customer.request_icecream(vendor, 3)
