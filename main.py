@@ -1,13 +1,14 @@
 class Wallet:
     def __init__(self, money):
         self.money = money
-        
-        
+          
+
 
     def credit(self,amount):
         self.money += amount
         print(f"you have : {self.money}")
         
+
 
     def debit(self,amount):
         self.money -= amount
@@ -22,39 +23,52 @@ class Wallet:
 
 
 class Person:
-   def __init__(self, name, location,money ):
+    def __init__(self, name, location,money ):
         self.name= name
         self.location= location
-        self.wallet=Wallet(money)
-    
-    def moveTo(point):
-        point = Person(location)
-        print(self.point)
+        self.money= Wallet(money)
 
+    def moveTo(self, point):
+         point = Person(location)
+         print(self.point)
 
-
-
-# person = Person("Moh", 5, 50)
-
-
-class Vendor:
+class Vendor(Person):
 #     # implement Vendor!
-#     pass
-    def __init__(self, name, location,money ):
+
+    def __init__(self, name, location,money,range,price):
         super().__init__(name,location,money)
-        self.range = 5
-        self.price = 1
-    def sellTo(customer,number_of_icecream):
+        self.range = range
+        self.price = price
+        range = 5
+        price = 1
+
+    def sellTo(self,customer,number_of_icecream):
         self.customer = customer
         self.number_of_icecream = number_of_icecream
-        while range<5 and price>0:
-            print("their is only 3 icecream")
-# vendor = Vendor("Abdallah", 3, 6)
+        self.moveTo(customer.location)
+        self.wallet.credit(self.price * number_of_icecream)
+        customer.wallet.debit(self.price * number_of_icecream)
+        print(f"{number_of_icecream} were sold")
 
+    def __str__(self):
+        return f"your range is {self.range} and the remaining price is {self.price}KWD"
 
-# class Customer:
+        
+
+class Customer(Person):
 #     # implement Customer!
-#     pass
+    def __init__(self, name, location,money ):
+        super().__init__(name,location,money)
+    def _is_in_range(self, vendor):
+        self.vendor = vendor
+        if abs(location - vendor.location)<= vendor.range:
+            print("the customer is in range")
+            return true
 
-
-# customer = Customer("Abdallah", 3, 6)
+        else:
+            print("the customer is out of range")
+            return false
+    
+    
+vendor = Vendor("Anfal", 3, 6 , 5 ,6)
+customer = Customer("Ali", 20, 6 )
