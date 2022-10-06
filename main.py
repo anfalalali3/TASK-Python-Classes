@@ -13,7 +13,7 @@ class Wallet:
 
     def debit(self,amount):
         self.money -= amount
-        print(f"you have : {self.money}")
+        print(f"vendor have : {self.money}")
         
 
 
@@ -58,8 +58,8 @@ class Customer(Person):
         super().__init__(name,location,money)
 
     def _is_in_range(self, vendor):
-        distance= vendor.location -self.location
-        if distance>vendor.range:
+        distance= abs(vendor.location -self.location)
+        if distance<=vendor.range:
             print("yeey!! you are in range")
             return True
 
@@ -91,7 +91,12 @@ vendor_Anfal = Vendor("Anfal", 10, 10 )
 nearby_customer = Customer("Ali",12, 10)
 distant_customer = Customer("Adal",1000,500)
 nearby_customer.request_icecream(vendor_Anfal,10)
-print(nearby_customer.wallet.money)
-print(vendor_Anfal.wallet.money)
-print(vendor_Anfal.location)
+
+
+vendor_Anfal = Vendor("Anfal", 30, 1000 )
+nearby_customer = Customer("Ali",50, 100)
+distant_customer = Customer("Adal",1000,500)
+nearby_customer.request_icecream(vendor_Anfal,2000)
+
+
 
